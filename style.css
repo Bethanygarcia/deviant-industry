@@ -2,3 +2,14 @@
     display: flex;
     justify-content: space-around;
 }
+
+.banner{
+    display: flex;
+    overflow: none;
+    height: 300px;
+    justify-content: space-around;
+}
+
+#profile-pic {
+    height: 70%;
+}
