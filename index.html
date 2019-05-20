@@ -2,21 +2,36 @@
 <html>
     <head>
         <title>Deviant Industry</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript" src="./script.js"></script>
+        <link rel="stylesheet" href="./style.css">
+        
     </head>
     <body>
-        <h2><marquee>Deviant Industry</marquee></h2>
+        <marquee><a href="https://fontmeme.com/graffiti-fonts/"><img src="https://fontmeme.com/permalink/190520/4e24a6f0c16f0dfa5b9d27a3c39475c8.png" alt="graffiti-fonts" border="0"></a></marquee>
         <div class="nav-bar">
+            <a href="./index.html">Home</a>
             <a href="./profile.html">Profile</a>
-            <a href="./myMusic.html">Music</a>
-            <a href="./new.html">New</a>
+            <a href="./explore.html">Explore</a>
         </div>
         
         <div id="newUser_quiz">
             <h5>Hey! It looks like you haven't taken our quiz. Take our quiz so we can more accurately recommend you music.</h5>
-            <a href="./quiz.html"><button>Take the quiz!</button></a>
+            <button id="newQuiz">Take the quiz!</button>
         </div>
+        
+        <div id="quizQ">
+            <h1 id="q1">1. Favorite music genre?</h1>
+            <input id="fav_genre">
+            <h1 id="q2">2. Favorite era of music?</h1>
+            <input id="fav_era">
+            <h1 id="q3">3. Favorite artist?</h1>
+            <input id="fav_artist">
+            
+            <h1 id="quote">What is your favorite music quote?</h1>
+            <input id="quote" type="text" maxlength="100">
+            <button id="submit">Create</button>
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="./script.js"></script>
     </body>
 </html>

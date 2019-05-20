@@ -1,9 +1,37 @@
 // JavaScript File
 /*global $*/
 /*global localStorage*/
+$("button").click(function(){
+    
+    $.ajax({
+        url: "https://api.soundcloud.com/tracks?q=beyonce&client_id=5aa8e389ba4e24b6106af5159ab3e344",
+        method: "GET",
+        success: function(response) {
+            $(".imageContainer").html("<img src='" + response.file + "'>");   
+        }
+    });
+});
+
+$("#quizQ").hide();
+
+var isClicked = localStorage.getItem("isClicked");
+console.log(isClicked);
+function check_if_quiz_clicked() {
+    if (isClicked) {
+        console.log("worked!");
+        $("newUser_quiz").hide();
+    }
+    else {
+        $("newUser_quiz").show();
+    }
+}
+
+check_if_quiz_clicked();
 
 $("#submit").click(function() {
     localStorage.setItem("isClicked", true);
+    $("#quizQ").hide();
+    
     var input_genre = $("#fav_genre").val();
     var input_era = $("#fav_era").val();
     var input_artist = $("#fav_artist").val();
@@ -20,26 +48,18 @@ $("#submit").click(function() {
     
     localStorage.setItem("stored_answers", user_object_string);
     
-check_if_quiz_clicked();
+    isClicked = localStorage.getItem("isClicked");
+    check_if_quiz_clicked();
 });
 
 function access_stored_answers() {
-    var stored_object_string= localStorage.getItem("stored_answers");
-    var object_user_answers= JSON.parse(stored_object_string);
+    var stored_object_string = localStorage.getItem("stored_answers");
+    var object_user_answers = JSON.parse(stored_object_string);
 }
 
 access_stored_answers();
 
-var isClicked = localStorage.getItem("isClicked");
-
-function check_if_quiz_clicked() {
-    if (isClicked) {
-        $("newUser_quiz").hide();
-    }
-    else {
-        $("newUser_quiz").show();
-    }
-}
-
-isClicked = localStorage.getItem("isClicked");
-check_if_quiz_clicked();
+$("#newQuiz").click(function() {
+    $("#newUser_quiz").hide();
+    $("#quizQ").show();
+});

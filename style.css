@@ -13,3 +13,11 @@
 #profile-pic {
     height: 70%;
 }
+body{
+    background: url("https://media2.giphy.com/media/O0QCryNMAqiVW/giphy.gif");
+   background-repeat: none;
+   background: cover;
+}
+h1,h2,h5{
+    color: white;
+}
