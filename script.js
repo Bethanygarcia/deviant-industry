@@ -15,14 +15,12 @@ $("button").click(function(){
 $("#quizQ").hide();
 
 var isClicked = localStorage.getItem("isClicked");
-console.log(isClicked);
 function check_if_quiz_clicked() {
-    if (isClicked = true) {
-        console.log("worked!");
-        $("newUser_quiz").hide();
+    if (isClicked) {
+        $("#newUser_quiz").hide();
     }
     else {
-        $("newUser_quiz").show();
+        $("#newUser_quiz").show();
     }
 }
 
