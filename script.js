@@ -17,7 +17,7 @@ $("#quizQ").hide();
 var isClicked = localStorage.getItem("isClicked");
 console.log(isClicked);
 function check_if_quiz_clicked() {
-    if (isClicked) {
+    if (isClicked = true) {
         console.log("worked!");
         $("newUser_quiz").hide();
     }
