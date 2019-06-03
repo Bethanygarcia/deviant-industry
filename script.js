@@ -21,7 +21,8 @@ var songIDs = [];
 //search for a song
 $("#search").click(function() {
     var user_song_input = $("#user_input").val();
-    var api_song_link = "https://api.soundcloud.com/tracks?q=" + user_song_input + "&client_id=5aa8e389ba4e24b6106af5159ab3e344";
+    var forLinkUsage = user_song_input.replace(/ /g, "-");
+    var api_song_link = "https://api.soundcloud.com/tracks?q=" + forLinkUsage + "&client_id=5aa8e389ba4e24b6106af5159ab3e344";
     
     orderOfSongs = [];
     songIDs = [];
