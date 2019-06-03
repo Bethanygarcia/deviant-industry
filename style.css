@@ -26,7 +26,8 @@ h1,h2,h5{
     display: flex;
     justify-content: center;
 }
-button{
+
+#submit, #newQuiz{
     color: blue;
     background-color: transparent;
     border-color: black;
@@ -35,6 +36,18 @@ button{
     width: 100%;
 }
 
-.banner {
-    background-color: green;
+#searchResults {
+    color: white;
+}
+
+#askAdding {
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+#savedMusic {
+    color: white;
 }

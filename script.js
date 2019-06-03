@@ -1,63 +1,96 @@
 // JavaScript File
 /*global $*/
 /*global localStorage*/
-$("button").click(function(){
+
+$("#adding").hide();
+
+var saveASong;
+var savedSongs = [];
+var temp = localStorage.getItem("librarySongs");
+
+if(temp != "") {
+    savedSongs = temp.split(",");
+}
+
+console.log(savedSongs);
+
+
+var orderOfSongs = [];
+var songIDs = [];
+
+//search for a song
+$("#search").click(function() {
+    var user_song_input = $("#user_input").val();
+    var api_song_link = "https://api.soundcloud.com/tracks?q=" + user_song_input + "&client_id=5aa8e389ba4e24b6106af5159ab3e344";
+    
+    orderOfSongs = [];
+    songIDs = [];
     
     $.ajax({
-        url: "https://api.soundcloud.com/tracks?q=beyonce&client_id=5aa8e389ba4e24b6106af5159ab3e344",
+        url: api_song_link,
         method: "GET",
         success: function(response) {
-            $(".imageContainer").html("<img src='" + response.file + "'>");   
-        }
+            $("#searchResults").empty();
+            
+            var count;
+            for (count = 0; count < response.length; count++) {
+                $("#searchResults").append((count + 1) + ". ");
+                $("#searchResults").append("Song Name: " + response[count].title + "<br>");
+                $("#searchResults").append("Posted by: " + response[count].user.username + "<br>");
+                $("#searchResults").append("Genre: " + response[count].genre + "<br>");
+                $("#searchResults").append("Soundcloud Link: <a href='" + response[count].permalink_url + "'>" + response[count].permalink_url + "<a/><br><br>");
+                
+                orderOfSongs.push(count);
+                songIDs.push(response[count].id);
+            }
+            
+            $("#searchResults").append("<br><br>");
+            $("#adding").show();
+            
+            $("#addingSongs").click(function() {
+                var user_input = $("#numOfSong").val();
+                $("#numOfSong").val("");
+        
+                var tempNumber = parseInt(user_input);
+                var number = tempNumber - 1;
+        
+                orderOfSongs.forEach(function(index) {
+                    if (number === index) {
+                        saveASong = songIDs[number];
+                        
+                        savedSongs.push(saveASong);
+                        console.log(savedSongs);
+                    }
+                });
+                
+                localStorage.setItem("librarySongs", savedSongs);
+            });
+        },
     });
 });
 
-$("#quizQ").hide();
-
-var isClicked = localStorage.getItem("isClicked");
-function check_if_quiz_clicked() {
-    if (isClicked) {
-        $("#newUser_quiz").hide();
+$("#accessSongs").click(function() {
+    $("#accessSongs").hide();
+    
+    if (temp != "") {
+        var randNum = 0;
+        
+        for(var songNums = 0; songNums < savedSongs.length; songNums++) {
+            $.ajax({
+                url: "https://api.soundcloud.com/tracks/" + savedSongs[songNums] + "?&client_id=5aa8e389ba4e24b6106af5159ab3e344",
+                method: "GET",
+                success: function(response) {
+                    randNum++;
+                    $("#savedMusic").append(randNum + ". ");
+                    $("#savedMusic").append("Song Name: " + response.title + "<br>");
+                    $("#savedMusic").append("Posted by: " + response.user.username + "<br>");
+                    $("#savedMusic").append("Genre: " + response.genre + "<br>");
+                    $("#savedMusic").append("Soundcloud Link: <a href='" + response.permalink_url + "'>" + response.permalink_url + "<a/><br><br>");
+                },
+            });
+        }
     }
     else {
-        $("#newUser_quiz").show();
+        $("#savedMusic").append("No music found!");
     }
-}
-
-check_if_quiz_clicked();
-
-$("#submit").click(function() {
-    localStorage.setItem("isClicked", true);
-    $("#quizQ").hide();
-    
-    var input_genre = $("#fav_genre").val();
-    var input_era = $("#fav_era").val();
-    var input_artist = $("#fav_artist").val();
-    var input_quote = $("#quote").val();
-    
-    var starting_quiz_answers = {
-        favorite_genre: input_genre,
-        favorite_era: input_era,
-        favorite_artist: input_artist,
-        user_quote: input_quote,
-    };
-    
-    var user_object_string= JSON.stringify(starting_quiz_answers);
-    
-    localStorage.setItem("stored_answers", user_object_string);
-    
-    isClicked = localStorage.getItem("isClicked");
-    check_if_quiz_clicked();
-});
-
-function access_stored_answers() {
-    var stored_object_string = localStorage.getItem("stored_answers");
-    var object_user_answers = JSON.parse(stored_object_string);
-}
-
-access_stored_answers();
-
-$("#newQuiz").click(function() {
-    $("#newUser_quiz").hide();
-    $("#quizQ").show();
 });

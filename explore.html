@@ -3,15 +3,26 @@
     <head>
         <title>Explore New Music!</title>
         <link rel="stylesheet" href="style.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript" src="./script.js"></script>
     </head>
     <body>
         <a class="graffitiTitle" href="https://fontmeme.com/graffiti-fonts/"><img src="https://fontmeme.com/permalink/190522/319e21b91aae0af587b41a6eb263d4fb.png" alt="graffiti-fonts" border="0"></a>
         <div class="nav-bar">
-            <a href="./index.html">Home</a>
             <a href="./profile.html">Profile</a>
             <a href="./explore.html">Explore</a>
+            <a href="./library.html">My Music</a>
+        </div><br>
+        
+        <input id="user_input" placeholder="Name of Song">
+        <button id="search">Search</button>
+        <div id="searchResults"></div>
+        
+        <div id="adding">
+            <h4 id="askAdding">Would you like to add a song to your library?</h4>
+            <input id="numOfSong" placeholder="Number of Song">
+            <button id="addingSongs">Add</button>
         </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="./script.js"></script>
     </body>
 </html>
