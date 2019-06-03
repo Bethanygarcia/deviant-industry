@@ -8,7 +8,7 @@ var saveASong;
 var savedSongs = [];
 var temp = localStorage.getItem("librarySongs");
 
-if(temp != "") {
+if(temp) {
     savedSongs = temp.split(",");
 }
 
@@ -20,6 +20,7 @@ var songIDs = [];
 
 //search for a song
 $("#search").click(function() {
+    
     var user_song_input = $("#user_input").val();
     var forLinkUsage = user_song_input.replace(/ /g, "-");
     var api_song_link = "https://api.soundcloud.com/tracks?q=" + forLinkUsage + "&client_id=5aa8e389ba4e24b6106af5159ab3e344";
@@ -73,7 +74,7 @@ $("#search").click(function() {
 $("#accessSongs").click(function() {
     $("#accessSongs").hide();
     
-    if (temp != "") {
+    if (temp) {
         var randNum = 0;
         
         for(var songNums = 0; songNums < savedSongs.length; songNums++) {
